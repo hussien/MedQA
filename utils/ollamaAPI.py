@@ -35,6 +35,8 @@ models_dict={"Llama-3.2-3B-Instruct_FT_MedQA_100S_q8_0":default_model_options,
              "qwen3:0.6b":default_model_options,
              "qwen3:4b":default_model_options,
              "qwen3:8b":default_model_options,
+             "medllama3-v20.Q4_K_M":default_model_options,
+             "medgemma_4b_1_q8":default_model_options,
              "z":default_model_options,
              }
 

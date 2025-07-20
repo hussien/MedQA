@@ -18,18 +18,20 @@ if __name__ == '__main__':
     # model_name="Llama-3.2-3B-Instruct_FT_Lora_MedQA_500S_q8_0"
     # model_name="Qwen3-0.6B_FT_Lora_MedQA_F16"
     # model_name = "Qwen3-14B_FT_Lora_MedQA_500S_q8_0"
-    # model_name ="Qwen3-14B-Q8_0"
+    model_name ="Qwen3-14B-Q8_0"
     # model_name="Qwen3-0.6B-Q8_0:latest"
     # model_name = "z"
-    model_name="qwen3:0.6b"
-    model_name="qwen3:4b"
-    model_name = "qwen3:8b"
+    # model_name="qwen3:0.6b"
+    # model_name="qwen3:4b"
+    # model_name = "qwen3:8b"
 
     # model_name="Qwen3-0.6B_FT_Lora_MedQA_F16"
     # model_name="Qwen3-0.6B_FT_Lora_MedQA_q4_k_m"
     # model_name="Qwen3-4B_FT_Lora_MedQA.Q8_0"
     # model_name="Qwen3-8B_FT_Lora_MedQA.Q4_K_M"
-    model_name="Qwen3-14B_FT_Lora_MedQA_500S_Q4_K_M"
+    # model_name="Qwen3-14B_FT_Lora_MedQA_500S_Q4_K_M"
+    # model_name="medllama3-v20.Q4_K_M"
+    # model_name="medgemma_4b_1_q8"
     if "_FT_" in model_name or True:
         use_ollama=False
     else:
