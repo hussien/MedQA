@@ -1,0 +1,27 @@
+ollama
+openai
+requests
+datasets
+pandas
+scikit-learn
+pytorch
+bitsandbytes
+langchain
+sentence-transformers
+faiss-cpu
+openpyxl
+pacmap
+langchain-community
+ragatouille
+accelerate
+xformers==0.0.29.post3
+peft
+trl
+triton
+cut_cross_entropy
+unsloth_zoo
+sentencepiece
+protobuf "datasets>=3.4.1"
+huggingface_hub
+hf_transfer
+unsloth

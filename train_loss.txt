@@ -1,0 +1,124 @@
+Qwen 14B
+Unsloth - 2x faster free finetuning | Num GPUs used = 1
+   \\   /|    Num examples = 7,225 | Num Epochs = 5 | Total steps = 500
+O^O/ \_/ \    Batch size per device = 4 | Gradient accumulation steps = 16
+\        /    Data Parallel GPUs = 1 | Total batch size (4 x 16 x 1) = 64
+ "-____-"     Trainable parameters = 64,225,280 of 14,832,532,480 (0.43% trained)
+ [466/500 1:31:55 < 06:44, 0.08 it/s, Epoch 4.12/5]
+Step	Training Loss
+10	2.867900
+20	2.875700
+30	2.822400
+40	2.614600
+50	2.223300
+60	1.944100
+70	1.794400
+80	1.596600
+90	1.446500
+100	1.272300
+110	1.146100
+120	1.107300
+130	1.110600
+140	1.077900
+150	1.082400
+160	1.077400
+170	1.059100
+180	1.061200
+190	1.071300
+200	1.043100
+210	1.050400
+220	1.034900
+230	1.015100
+240	1.027900
+250	1.017100
+260	1.025100
+270	1.020400
+280	1.018700
+290	1.027000
+300	1.020900
+310	1.005900
+320	1.022900
+330	1.025700
+340	1.011300
+350	1.005300
+360	1.028800
+370	0.999400
+380	1.010300
+390	1.016100
+400	1.010500
+410	0.996700
+420	1.004700
+430	1.015100
+440	1.037300
+450	1.013400
+460	1.002200
+ [500/500 1:38:51, Epoch 4/5]
+
+Step	Training Loss
+10	2.867900
+20	2.875700
+30	2.822400
+40	2.614600
+50	2.223300
+60	1.944100
+70	1.794400
+80	1.596600
+90	1.446500
+100	1.272300
+110	1.146100
+120	1.107300
+130	1.110600
+140	1.077900
+150	1.082400
+160	1.077400
+170	1.059100
+180	1.061200
+190	1.071300
+200	1.043100
+210	1.050400
+220	1.034900
+230	1.015100
+240	1.027900
+250	1.017100
+260	1.025100
+270	1.020400
+280	1.018700
+290	1.027000
+300	1.020900
+310	1.005900
+320	1.022900
+330	1.025700
+340	1.011300
+350	1.005300
+360	1.028800
+370	0.999400
+380	1.010300
+390	1.016100
+400	1.010500
+410	0.996700
+420	1.004700
+430	1.015100
+440	1.037300
+450	1.013400
+460	1.002200
+470	1.021200
+480	1.009500
+490	1.005600
+500	0.997700
+
+
+==((====))==  Unsloth 2025.7.4: Fast Qwen3 patching. Transformers: 4.53.2.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.557 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.6.0+cu124. CUDA: 8.0. CUDA Toolkit: 12.4. Triton: 3.2.0
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.29.post3. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+
+5951.8784 seconds used for training.
+99.2 minutes used for training.
+Peak reserved memory = 37.605 GB.
+Peak reserved memory for training = 0.0 GB.
+Peak reserved memory % of max memory = 95.065 %.
+Peak reserved memory for training % of max memory = 0.0 %.
+
+TrainOutput(global_step=500, training_loss=1.2558286743164062, metrics={'train_runtime': 5951.8784, 'train_samples_per_second': 5.376, 'train_steps_per_second': 0.084, 'total_flos': 1.0065242088085094e+18, 'train_loss': 1.2558286743164062})
