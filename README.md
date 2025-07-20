@@ -42,7 +42,6 @@ or
 1. Host you model in an LLM inference engine such as <a href="https://ollama.com/library/qwen3:8b">ollama</a> or <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server">llama-cpp server</a>
     - list of  Qwen3 Model can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>
     - list of fine-tuned models can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>
-2. Extract MedQA dataset 
 2. Test the fine-tuned model QA:
 ```bash
     python MedQA.py --model_name=Qwen3-8B --inference_api=http://0.0.0.0::11434/api/generate --test_size=100
