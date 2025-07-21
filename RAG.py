@@ -15,7 +15,18 @@ import faiss
 from sentence_transformers import SentenceTransformer
 from utils.utils import get_testset_questions,get_prompts
 import argparse
+import wget
+import zipfile
+def download_documents():
+        url = 'https://www.kaggle.com/api/v1/datasets/download/evidence/medqa-usmle?dataset_version_number=1'
+        output_path = 'data/medqa-usmle.zip'
+        filename = wget.download(url, out=output_path)
+        print(f"File downloaded to: {filename}")
+        with zipfile.ZipFile(output_path, 'r') as zip_ref:
+            zip_ref.extractall('data/')  # Optional: specify a directory to extract to
+
 def load_data(directory):
+    download_documents()
     documents = []
     for filename in os.listdir(directory):
         if filename.endswith(".txt"):  # Assuming the files are .txt files
@@ -61,13 +72,13 @@ def split_documents(chunk_size,knowledge_base,tokenizer_name):
                 docs_processed_unique.append(doc)
 
         return docs_processed_unique
-def process_docs(docs_directory, proccessed_pickle_path=""):
+def process_docs(docs_directory, proccessed_pickle_path="",build_index=False):
 
 
     # We use a hierarchical list of separators specifically tailored for splitting Markdown documents
     # This list is taken from LangChain's MarkdownTextSplitter class
     docs_processed = []
-    if os.path.exists(proccessed_pickle_path):
+    if not build_index and os.path.exists(proccessed_pickle_path):
         with open(proccessed_pickle_path, 'rb') as f:
             docs_processed = pickle.load(f)
     else:
@@ -90,22 +101,25 @@ def process_docs(docs_directory, proccessed_pickle_path=""):
     return docs_processed
 
 data_path = 'data/'
-docs_directory = data_path+'data_clean/textbooks/en'
+docs_directory = data_path+'medqa-usmle/data_clean/textbooks/en'
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='GLOW-QA')
-    parser.add_argument('--model_name', type=str, default="unsloth/Qwen3-8B", help="The LLM version of the model")
+    parser = argparse.ArgumentParser(description='Med-QA')
+    parser.add_argument('--model_name', type=str, default="Qwen3-0.6B", help="The LLM version of the model")
     parser.add_argument('--dataset_name', type=str, default='GBaker/MedQA-USMLE-4-options', help="The training set")
-    parser.add_argument('--inference_api', type=str, default='http://0.0.0.0::11434/api/generate',
+    parser.add_argument('--inference_api', type=str, default='http://0.0.0.0:22101',
                         help="the LLM inference engine api")
+    parser.add_argument('--build_index', action='store_true',
+                        help="rebuild the Faiss index ")
+
     parser.add_argument('--test_size', type=int, default=100, help='the number of test set samples')
     args = parser.parse_args()
 
-    docs_processed=process_docs(docs_directory,data_path+"MedQA_en_documents.pkl")
+    docs_processed=process_docs(docs_directory,data_path+"MedQA_en_documents.pkl",args.build_index)
     # Load the model
     model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
     ############## Generate Docs Embeddings #####################
     embds = []
-    if os.path.exists(data_path + 'docs_emb_qwen3.pkl'):
+    if not args.build_index and os.path.exists(data_path + 'docs_emb_qwen3.pkl'):
         with open(data_path + 'docs_emb_qwen3.pkl', 'rb') as f:
             embds = pickle.load(f)
     else:
@@ -113,6 +127,7 @@ if __name__ == '__main__':
             embds.append(model.encode(doc.metadata['source'] + "\n" + doc.page_content))
         with open(data_path + 'docs_emb_qwen3.pkl', 'wb') as f:
             pickle.dump(embds, f)
+        exit(1)
     ################# build Faiss VDB ##############
     KNOWLEDGE_VECTOR_DATABASE = faiss.IndexFlatIP(embds[0].shape[0])  # build the index
     print(KNOWLEDGE_VECTOR_DATABASE.is_trained)

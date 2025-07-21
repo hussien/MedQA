@@ -7,9 +7,9 @@ from utils.utils import get_testset_questions,get_prompts
 import argparse
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Med-QA')
-    parser.add_argument('--model_name', type=str, default="unsloth/Qwen3-8B", help="The LLM version of the model")
+    parser.add_argument('--model_name', type=str, default="Qwen3-8B", help="The LLM version of the model")
     parser.add_argument('--dataset_name', type=str, default='GBaker/MedQA-USMLE-4-options', help="The training set")
-    parser.add_argument('--inference_api', type=str, default='http://0.0.0.0::11434/api/generate', help="the LLM inference engine api")
+    parser.add_argument('--inference_api', type=str, default='http://0.0.0.0:11434', help="the LLM inference engine api")
     parser.add_argument('--test_size', type=int, default=100, help='the number of test set samples')
     args = parser.parse_args()
 

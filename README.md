@@ -38,7 +38,7 @@ or
     llama-server -m <your_model.gguf> --host <machine_ip> --port <machine_port> -ngl < num_layers_to_offload_into_gpu>
 ```
     
-## Build Faiss Vector DB for RAG
+## Build Faiss Vector DB for RAG (for the frist time only)
 - Build the Faiss vector DB using the colab notebook [![Build Faiss Vector DB](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15Uq7tDr48x4oWFcAZ-GaC-CYCTX0A8Yf?usp=sharing)
 
 or
@@ -52,10 +52,10 @@ or
     - list of fine-tuned models can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>
 2. Test the fine-tuned model QA:
 ```bash
-    python MedQA.py --model_name=Qwen3-8B --inference_api=http://0.0.0.0:11434/api/generate --test_size=100
+    python MedQA.py --model_name=Qwen3-8B --inference_api=<llama-sever-api-url>--test_size=100
 ```
 3. Test the RAG QA:
     - Extract the zip files [data/docs_emb_qwen3.pkl.zip, data/MedQA_en_documents.pkl.zip] if did not build the faiss DB 
 ```bash
-    python RAG.py --build_index=false --model_name=Qwen3-8B --inference_api=http://0.0.0.0:11434/api/generate --test_size=100
+    python RAG.py --build_index=false --model_name=Qwen3-8B --inference_api=<llama-sever-api-url> --test_size=100
 ```
