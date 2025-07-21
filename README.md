@@ -48,8 +48,8 @@ or
 ```
 ## Inference
 1. Host you model in an LLM inference engine such as <a href="https://ollama.com/library/qwen3:8b">ollama</a> or <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server">llama-cpp server</a>
-    - list of  Qwen3 Model can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>
-    - list of fine-tuned models can be found <a href="https://huggingface.co/Hussein-Abdallah/Qwen3-MedQA-FineTuned/">here.</a>
+    - list of  Qwen3 Model can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>, <a href="https://huggingface.co/JL42/medllama3-v20-GGUF">medllama3-v20</a>,<a href="https://huggingface.co/google/medgemma-4b-it/tree/main">medgemma</a>,
+    - list of fine-tuned models can be found <a href="https://huggingface.co/Hussein-Abdallah/Qwen3-MedQA-FineTuned/tree/main">here.</a>
 2. Test the fine-tuned model QA:
 ```bash
     python MedQA.py --model_name=Qwen3-8B --inference_api=<llama-sever-api-url>--test_size=100
