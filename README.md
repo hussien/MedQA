@@ -14,6 +14,8 @@ LLM, meanwhile, the relevant information for the given ques-
 tion is retrieved from a knowledge base and augmented to the
 doctor prompt
 </div>
+ 
+- Read the detailed report <a href="report/MedQA.pdf" target="_blank" >here</a>. 
 
 ## Build conda environment
 
@@ -24,23 +26,23 @@ doctor prompt
 ```
 
 ## Fine tunning
-- you can use the colab notebook [![Qwen3 FineTune](https://colab.research.google.com/assets/colab-badge.svg)]( https://colab.research.google.com/drive/1Sl84BvWWWFePH1gxnlwjMcwHusbKVGZG?usp=sharing) and generate the quantized Q4_K_M.gguf quantized version.
+- Use the colab notebook [![Qwen3 FineTune](https://colab.research.google.com/assets/colab-badge.svg)]( https://colab.research.google.com/drive/1Sl84BvWWWFePH1gxnlwjMcwHusbKVGZG?usp=sharing) and generate the quantized Q4_K_M.gguf quantized version.
 
 or
-- train your model using the command
+- Train your model using the command
 ```bash
     python fine-tune.py --model-name=unsloth/Qwen3-0.6B
 ```
-- serve the fine-tuned model using <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server">llama-cpp server</a>
+- Serve the fine-tuned model using <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server">llama-cpp server</a>
 ```bash
     llama-server -m <your_model.gguf> --host <machine_ip> --port <machine_port> -ngl < num_layers_to_offload_into_gpu>
 ```
     
 ## Build Faiss Vector DB for RAG
-- you can build the Faiss vector DB using the colab notebook [![Build Faiss Vector DB](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15Uq7tDr48x4oWFcAZ-GaC-CYCTX0A8Yf?usp=sharing)
+- Build the Faiss vector DB using the colab notebook [![Build Faiss Vector DB](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15Uq7tDr48x4oWFcAZ-GaC-CYCTX0A8Yf?usp=sharing)
 
 or
-- build the faiss index using the command
+- Build the faiss index using the command
 ```bash
     python RAG.py --build_index=true
 ```
