@@ -127,10 +127,7 @@ if __name__ == '__main__':
     llm_test_dataset = get_testset_questions(path=args.dataset_name,test_size=args.test_size)
     print(llm_test_dataset)
     results = []
-    if "_FT_" in args.model_name or True:
-        use_ollama = False
-    else:
-        use_ollama = True
+    use_ollama = False
     print(f"model_name={args.model_name}\tuse_ollama={use_ollama}")
     for idx, row in enumerate(llm_test_dataset):
         ########### get RAG top-1 Doc (Search FAISS ############

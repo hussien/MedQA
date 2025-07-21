@@ -37,10 +37,7 @@ if __name__ == '__main__':
     # model_name="medllama3-v20.Q4_K_M"
     # model_name="medgemma_4b_1_q8"
     }
-    if "_FT_" in args.model_name or True:
-        use_ollama=False
-    else:
-        use_ollama = True
+    use_ollama=False
     print(f"model_name={args.model_name}\tuse_ollama={use_ollama}")
     for idx,row in enumerate(llm_test_dataset):
         user_prompt,system_prompt,answer,answer_idx=get_prompts(row)
