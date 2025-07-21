@@ -2,7 +2,7 @@ import re
 import requests
 import pandas as pd
 from datasets import load_dataset
-def get_test_question(path="GBaker/MedQA-USMLE-4-options",test_size=None):
+def get_testset_questions(path="GBaker/MedQA-USMLE-4-options",test_size=None):
     dataset = load_dataset(path, split="test")
     # ds_df = pd.DataFrame(dataset)
     if test_size is None:

@@ -3,6 +3,7 @@ A Fine tunning + RAG pipline for Medical QA using the MedQA dataset
 <br>
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <div align="center">
+<br>
 <img src="figs/system.png" width="70%"/>
 <br>
 The Medical QA pipelines. A: The SLM Fine-Tuning
@@ -13,7 +14,8 @@ LLM, meanwhile, the relevant information for the given ques-
 tion is retrieved from a knowledge base and augmented to the
 doctor prompt
 </div>
-## build conda environment
+
+## Build conda environment
 
 ```bash
     conda create --name MedQA -c conda-forge python=3.11
