@@ -20,7 +20,7 @@ doctor prompt
 ```bash
     conda create --name MedQA -c conda-forge python=3.11
     conda activate MedQA
-    pip install requirements.txt
+    pip install -r requirements.txt
 ```
 
 ## Fine tunning
@@ -29,7 +29,7 @@ doctor prompt
 or
 - train your model using the command
 ```bash
-    python fine-tune.py --model-name=Qwem3-8B
+    python fine-tune.py --model-name=unsloth/Qwen3-0.6B
 ```
     
 ## Build Faiss Vector DB for RAG
@@ -46,10 +46,10 @@ or
     - list of fine-tuned models can be found <a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f">here.</a>
 2. Test the fine-tuned model QA:
 ```bash
-    python MedQA.py --model_name=Qwen3-8B --inference_api=http://0.0.0.0::11434/api/generate --test_size=100
+    python MedQA.py --model_name=Qwen3-8B --inference_api=http://0.0.0.0:11434/api/generate --test_size=100
 ```
 3. Test the RAG QA:
     - Extract the zip files [data/docs_emb_qwen3.pkl.zip, data/MedQA_en_documents.pkl.zip] if did not build the faiss DB 
 ```bash
-    python RAG.py --build_index=false --model_name=Qwen3-8B --inference_api=http://0.0.0.0::11434/api/generate --test_size=100
+    python RAG.py --build_index=false --model_name=Qwen3-8B --inference_api=http://0.0.0.0:11434/api/generate --test_size=100
 ```

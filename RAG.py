@@ -62,11 +62,7 @@ def split_documents(chunk_size,knowledge_base,tokenizer_name):
 
         return docs_processed_unique
 def process_docs(docs_directory, proccessed_pickle_path=""):
-    documents_df = load_data(docs_directory)
-    ds = Dataset.from_pandas(documents_df)
-    RAW_KNOWLEDGE_BASE = [
-        LangchainDocument(page_content=doc["text"], metadata={"source": doc["title"]})
-        for doc in tqdm(ds)]
+
 
     # We use a hierarchical list of separators specifically tailored for splitting Markdown documents
     # This list is taken from LangChain's MarkdownTextSplitter class
@@ -75,6 +71,11 @@ def process_docs(docs_directory, proccessed_pickle_path=""):
         with open(proccessed_pickle_path, 'rb') as f:
             docs_processed = pickle.load(f)
     else:
+        documents_df = load_data(docs_directory)
+        ds = Dataset.from_pandas(documents_df)
+        RAW_KNOWLEDGE_BASE = [
+            LangchainDocument(page_content=doc["text"], metadata={"source": doc["title"]})
+            for doc in tqdm(ds)]
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=512,  # The maximum number of characters in a chunk: we selected this value arbitrarily
             chunk_overlap=100,  # The number of characters to overlap between chunks
@@ -152,9 +153,9 @@ if __name__ == '__main__':
             model_answer = response.split("Answer")[-1].replace("'", "").split(" ")[0]
 
         results.append([idx, model_answer, answer_idx, str(usage)])
-        print(f"Q_idx:{idx} \t Pred Answer={response.split("Answer")[-1]}\t\t Real Answer idx={answer_idx}")
+        print(f"Q_idx:{idx} \t Pred Answer={response.split('Answer')[-1]}\t\t Real Answer idx={answer_idx}")
     results_df = pd.DataFrame(results, columns=["Q_idx", "pred", "real", "usage"])
     results_df["Correct_Ans"] = results_df.apply(lambda x: 1 if x["real"] == x["pred"] else 0, axis=1)
     results_df.to_csv("results/RAG_"+args.model_name + f"_results_{test_size}_ts_{datetime.now()}.csv", index=False)
-    print(f"Accuracy={results_df["Correct_Ans"].sum() / len(results_df["Correct_Ans"])}")
+    print(f"Accuracy={results_df['Correct_Ans'].sum() / len(results_df['Correct_Ans'])}")
 

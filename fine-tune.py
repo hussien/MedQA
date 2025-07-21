@@ -3,7 +3,9 @@ from trl import SFTConfig, SFTTrainer
 from datasets import load_dataset
 import torch
 import argparse
+tokenizer=None
 def format_chat_template(row):
+    global tokenizer
     system = "You are a professional, highly experienced doctor professor. \n please answers the patients' questions using only one of the options in the brackets."
     patient_case = "#Patient Case:\n" + row["question"]
     Choices = "#Choices:\n" + "\n".join([str(k) + ": " + str(v) for k, v in row["options"].items()])
@@ -20,6 +22,7 @@ def format_chat_template(row):
     )
     return row
 def save_model(model,model_name):
+    global tokenizer
     model_name = model_name.split("/")[-1] + "_FT_Lora_MedQA"
     model.save_pretrained(model_name)  # Local saving
     tokenizer.save_pretrained(model_name)
@@ -47,6 +50,7 @@ def save_model(model,model_name):
             token="",  # Get a token at https://huggingface.co/settings/tokens
         )
 def unsloth_finetune(model_name="unsloth/Qwen3-8B",dataset_name="GBaker/MedQA-USMLE-4-options",max_steps=500):
+    global tokenizer
     max_seq_length = 2048 # Choose any! We auto support RoPE Scaling internally!
     dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+    
     max_seq_length = 2048
@@ -126,7 +130,7 @@ def unsloth_finetune(model_name="unsloth/Qwen3-8B",dataset_name="GBaker/MedQA-US
     return model
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='GLOW-QA')
-    parser.add_argument('--model_name', type=str, default="unsloth/Qwen3-8B",help="The LLM version of the model")
+    parser.add_argument('--model_name', type=str, default="unsloth/Qwen3-0.6B",help="The LLM version of the model")
     parser.add_argument('--dataset_name', type=str, default='GBaker/MedQA-USMLE-4-options',help="The training set")
     parser.add_argument('--max_steps', type=int, default=500, help='number of finetunning steps')
     args = parser.parse_args()

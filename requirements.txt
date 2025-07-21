@@ -4,13 +4,13 @@ requests
 datasets
 pandas
 scikit-learn
-pytorch
+torch
+torchvision
+torchaudio --index-url https://download.pytorch.org/whl/cu118
 bitsandbytes
 langchain
 sentence-transformers
 faiss-cpu
-openpyxl
-pacmap
 langchain-community
 ragatouille
 accelerate
@@ -19,9 +19,9 @@ peft
 trl
 triton
 cut_cross_entropy
-unsloth_zoo
 sentencepiece
-protobuf "datasets>=3.4.1"
+protobuf
 huggingface_hub
 hf_transfer
 unsloth
+unsloth_zoo

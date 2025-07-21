@@ -57,9 +57,9 @@ if __name__ == '__main__':
             model_answer = response.split("Answer")[-1].replace("'", "").split(" ")[0]
 
         results.append([idx,model_answer,answer_idx,str(usage)])
-        print(f"Q_idx:{idx} \t Pred Answer={response.split("Answer")[-1]}\t\t Real Answer idx={answer_idx}")
+        print(f"Q_idx:{idx} \t Pred Answer={response.split('Answer')[-1]}\t\t Real Answer idx={answer_idx}")
     results_df=pd.DataFrame(results,columns=["Q_idx","pred","real","usage"])
     results_df["Correct_Ans"]=results_df.apply(lambda x: 1 if x["real"]==x["pred"] else 0,axis=1)
     results_df.to_csv("results/"+model_name+f"_results_{test_size}_ts_{datetime.now()}.csv",index=False)
-    print(f"Accuracy={results_df["Correct_Ans"].sum()/len(results_df["Correct_Ans"])}")
+    print(f"Accuracy={results_df['Correct_Ans'].sum()/len(results_df['Correct_Ans'])}")
 
