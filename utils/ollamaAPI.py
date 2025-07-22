@@ -208,6 +208,10 @@ def chat(model="o1-mini", prompt_in="", key="", system_prompt=None,assistant_pro
                 ################ LLamaCPP ################
                 response = open_ai_request(model, prompt_in, system_prompt, assistant_prompt, temperature,inference_api)
                 usage_keys = ['completion_tokens','prompt_tokens','total_tokens']
-                return response["choices"][0]["message"]["content"].split("</think>")[-1].replace("\n", ""), {key: response["usage"][key] for key in usage_keys}, response
+                dict_res={key: response["usage"][key] for key in usage_keys}
+                timing_keys= ['prompt_n', 'prompt_ms', 'prompt_per_token_ms', 'prompt_per_second', 'predicted_n', 'predicted_ms', 'predicted_per_token_ms', 'predicted_per_second']
+                for key in timing_keys:
+                    dict_res[key]=response["timings"][key]
+                return response["choices"][0]["message"]["content"].split("</think>")[-1].replace("\n", ""),dict_res, response
         except:
             return None, None, None
